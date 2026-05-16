@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>SORTEIO DE TEMAS — ANATOMIA MICROSCÓPICA</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* ── RESET & BASE ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --paper:   #f7f4ef;
+  --paper2:  #efeae2;
+  --paper3:  #e5dfd4;
+  --ink:     #1c1a17;
+  --ink2:    #4a4540;
+  --ink3:    #8a837a;
+  --ink4:    #b8b0a6;
+  --he-rosa: #c4507a;
+  --he-azul: #4a78b8;
+  --border:  rgba(28,26,23,0.12);
+  --border2: rgba(28,26,23,0.22);
+  --r:    14px;
+  --r-sm: 8px;
+  --r-xs: 5px;
+  /* toque mínimo */
+  --touch: 48px;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  /* padding generoso no mobile */
+  padding: 1.5rem 1rem 5rem;
+  -webkit-font-smoothing: antialiased;
+  text-transform: uppercase;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ── HEADER ───────────────────────────────────────── */
+header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1.5px solid var(--border);
+}
+
+.header-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--he-rosa);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 2px;
+  background: var(--he-rosa);
+  border-radius: 2px;
+}
+
+header h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(18px, 5vw, 26px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+header p {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink3);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* ── TABS ─────────────────────────────────────────── */
+.tab-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 1.25rem;
+  background: var(--paper2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 4px;
+}
+
+.tab {
+  height: var(--touch);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--r-xs);
+  border: none;
+  background: transparent;
+  color: var(--ink3);
+  transition: all 0.18s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  gap: 6px;
+}
+
+.tab:active { opacity: 0.7; }
+
+.tab.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ── CARD ─────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.25rem;
+  margin-bottom: 0.875rem;
+}
+
+.card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--ink4);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.card-label::before {
+  content: '';
+  display: inline-block;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--he-rosa);
+  flex-shrink: 0;
+}
+
+/* ── INPUTS ───────────────────────────────────────── */
+input[type="email"],
+input[type="text"] {
+  width: 100%;
+  height: var(--touch);
+  padding: 0 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: max(16px, 13px);
+  letter-spacing: 0.03em;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  outline: none;
+  margin-bottom: 10px;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  text-transform: uppercase;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input::placeholder {
+  color: var(--ink4);
+  font-size: 12px;
+}
+
+input:focus {
+  border-color: var(--he-rosa);
+  box-shadow: 0 0 0 3px rgba(196,80,122,0.12);
+}
+
+/* ── BOTÃO ────────────────────────────────────────── */
+.btn {
+  width: 100%;
+  height: var(--touch);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+  border: none;
+  background: var(--ink);
+  color: var(--paper);
+  transition: all 0.18s;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+}
+
+.btn:active { transform: scale(0.98); opacity: 0.85; }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+/* ── MENSAGENS ────────────────────────────────────── */
+.msg {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  padding: 11px 14px;
+  border-radius: var(--r-sm);
+  margin-top: 10px;
+  line-height: 1.65;
+  text-transform: uppercase;
+}
+
+.msg.error  { background: #fef1f4; color: #9b2a48; border: 1px solid #f5c6d4; }
+.msg.success { background: #f0f7f2; color: #1a5c32; border: 1px solid #b8ddc5; }
+.msg.info   { background: #f0f4fb; color: #1f3f78; border: 1px solid #bcd0f0; }
+
+/* ── INFO GRUPO ───────────────────────────────────── */
+.info-grupo-box {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+  margin-bottom: 1.125rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rep-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: var(--paper2);
+  color: var(--ink2);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* ── ANIMAÇÃO SHUFFLE ─────────────────────────────── */
+.shuffle-display {
+  margin-top: 0.875rem;
+  text-align: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--ink3);
+  min-height: 28px;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+/* ── RESULT BOX ───────────────────────────────────── */
+.result-box {
+  border-radius: var(--r);
+  padding: 2rem 1.25rem 1.5rem;
+  text-align: center;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--t-bg, #f5f0ff);
+  border: 1px solid var(--t-border, rgba(124,80,200,0.2));
+}
+
+/* número enorme decorativo */
+.result-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 120px;
+  line-height: 1;
+  color: var(--t-accent, #7c50c8);
+  opacity: 0.07;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+
+.result-inner { position: relative; z-index: 1; }
+
+.result-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--t-accent, #7c50c8);
+  opacity: 0.75;
+  margin-bottom: 0.5rem;
+}
+
+.result-tema {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 400;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+  animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.result-grupo {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--t-accent, #7c50c8);
+  margin-bottom: 0.5rem;
+}
+
+.result-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  opacity: 0.65;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.65); opacity: 0; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+/* ── FICHA ────────────────────────────────────────── */
+.ficha {
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  margin-top: 0.875rem;
+  border: 1px solid var(--t-border, rgba(124,80,200,0.2));
+}
+
+.ficha-header {
+  background: var(--t-header, rgba(124,80,200,0.07));
+  padding: 0 1rem;
+  height: var(--touch);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ficha-header:active { opacity: 0.75; }
+
+.ficha-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--t-accent, #7c50c8);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ficha-title::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--t-accent, #7c50c8);
+  flex-shrink: 0;
+}
+
+.ficha-chevron {
+  font-size: 12px;
+  color: var(--t-accent, #7c50c8);
+  transition: transform 0.22s;
+  line-height: 1;
+}
+
+.ficha-chevron.open { transform: rotate(180deg); }
+
+.ficha-body {
+  background: #fff;
+  padding: 0 1rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.32s ease, padding 0.18s;
+}
+
+.ficha-body.open { max-height: 600px; padding: 1rem; }
+
+.ficha-row {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ficha-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.ficha-row-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 4px;
+}
+
+.ficha-row-value {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.ficha-ref {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink2);
+  line-height: 1.75;
+  background: var(--paper);
+  border-radius: var(--r-xs);
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid var(--border);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+/* ── CONTADORES ───────────────────────────────────── */
+.counters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 0.875rem;
+}
+
+.counter-item {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 1rem;
+  text-align: center;
+}
+
+.counter-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.counter-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+/* ── PROGRESS BAR ─────────────────────────────────── */
+.progress-wrap {
+  background: var(--paper2);
+  border-radius: 99px;
+  height: 3px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--he-rosa), var(--he-azul));
+  transition: width 0.5s ease;
+}
+
+/* ── PAINEL ───────────────────────────────────────── */
+.painel-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  min-height: 56px;
+}
+
+.painel-row:last-child { border-bottom: none; }
+
+.p-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ink4);
+  min-width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.p-info { flex: 1; min-width: 0; }
+
+.p-nome {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.p-email {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.tema-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  padding: 4px 9px;
+  border-radius: 99px;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid currentColor;
+  /* cor via inline style */
+}
+
+.pending-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  padding: 4px 9px;
+  border-radius: 99px;
+  background: var(--paper2);
+  color: var(--ink4);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.row-vazio { opacity: 0.35; }
+
+/* ── SPINNER ──────────────────────────────────────── */
+.spin { display: inline-block; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── FOOTER ───────────────────────────────────────── */
+footer {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  text-align: center;
+  line-height: 2;
+}
+
+/* ── HE DIVIDER ───────────────────────────────────── */
+.he-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+.he-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--he-rosa), var(--he-azul)); opacity: 0.35; }
+.he-dot  { width: 5px; height: 5px; border-radius: 50%; background: linear-gradient(135deg, var(--he-rosa), var(--he-azul)); }
+
+/* ── RESPONSIVE ──────────────────────────────────────
+   Em telas muito pequenas (<360px) reduzimos padding
+   ─────────────────────────────────────────────────── */
+@media (max-width: 360px) {
+  body { padding: 1rem 0.75rem 4rem; }
+  .card { padding: 1rem; }
+  header h1 { font-size: 18px; }
+  .result-num { font-size: 90px; }
+  .tema-pill { max-width: 100px; }
+}
+
+@media (min-width: 600px) {
+  body { padding: 2.5rem 1.5rem 5rem; }
+  .card { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-eyebrow">SCM0051 · 2026.1</div>
+    <h1>Sorteio de Temas de Anatomia Microscópica</h1>
+    <p>CITOLOGIA HISTOLOGIA E ANATOMIA MICROSCÓPICA — 2026.1 (TURNO NOTURNO)</p>
+  </header>
+
+  <!-- TABS -->
+  <div class="tab-bar" role="tablist">
+    <button class="tab active" id="tab-sortear" role="tab" aria-selected="true"  onclick="switchTab('sortear')">↳ Sortear Tema</button>
+    <button class="tab"        id="tab-painel"  role="tab" aria-selected="false" onclick="switchTab('painel')">≡ Painel</button>
+  </div>
+
+  <!-- ── ABA: SORTEAR ── -->
+  <div id="view-sortear" role="tabpanel">
+
+    <!-- PASSO 1: e-mail -->
+    <div class="card" id="step-email">
+      <div class="card-label">Acesso do Representante</div>
+      <input type="email"
+             id="email-input"
+             placeholder="email@edu.unirio.br"
+             autocomplete="email"
+             inputmode="email"
+             autocapitalize="none"
+             autocorrect="off"
+             spellcheck="false" />
+      <button class="btn" id="btn-acessar" onclick="acessar()">Verificar Acesso →</button>
+      <div id="msg-acesso" role="alert"></div>
+    </div>
+
+    <!-- PASSO 2: nome -->
+    <div class="card" id="step-nome" style="display:none;">
+      <div class="card-label">Identificação do Representante</div>
+      <input type="text"
+             id="nome-input"
+             placeholder="Primeiro e Último Nome"
+             autocomplete="name"
+             autocapitalize="words"
+             spellcheck="false"
+             maxlength="80" />
+      <button class="btn" onclick="confirmarNome()">Confirmar e Continuar →</button>
+      <div id="msg-nome" role="alert"></div>
+    </div>
+
+    <!-- PASSO 3: sortear -->
+    <div class="card" id="section-sortear" style="display:none;">
+      <div class="card-label">Seu Grupo</div>
+      <div id="info-grupo"></div>
+      <button class="btn" id="btn-sortear" onclick="sortear()">Sortear Tema →</button>
+      <div class="shuffle-display" id="shuffle-display" style="display:none;"></div>
+      <div id="resultado-sortear"></div>
+    </div>
+
+  </div>
+
+  <!-- ── ABA: PAINEL ── -->
+  <div id="view-painel" role="tabpanel" style="display:none;">
+
+    <div class="counters">
+      <div class="counter-item">
+        <div class="counter-num" id="cnt-sorteados">0</div>
+        <div class="counter-lbl">Sorteados</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-num" id="cnt-pendentes">10</div>
+        <div class="counter-lbl">Pendentes</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Grupos e Temas</div>
+      <div class="he-divider"><div class="he-line"></div><div class="he-dot"></div><div class="he-line"></div></div>
+      <div id="lista-painel"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    Cada representante sorteia uma única vez · Temas não se repetem<br>
+    Dúvidas? Entre em contato com os monitores.
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO — edite somente esta seção
+   ============================================================ */
+
+// Qualquer e-mail com o domínio institucional da Unirio é aceito.
+// Para testes com outros domínios, comente a linha abaixo e descomente a segunda.
+const DOMINIO_AUTORIZADO = "@edu.unirio.br";
+// const DOMINIO_AUTORIZADO = ""; // modo teste: qualquer e-mail passa
+
+// Ordem fixa: índice 0 → Grupo 1, índice 1 → Grupo 2 …
+const TEMAS = [
+  "CAV. ORAL + LÍNGUA",
+  "ESÔFAGO E ESTÔMAGO",
+  "INTESTINO DELGADO",
+  "INTESTINO GROSSO",
+  "SALIVARES",
+  "PÂNCREAS",
+  "FÍGADO",
+  "TIREOIDE E PARATIREOIDES",
+  "ADRENAIS",
+  "HIPÓFISE"
+];
+
+/* Fichas de cada tema */
+const FICHAS = [
+  { cap:"CAPÍTULO 15 — SISTEMA DIGESTÓRIO",
+    esp:"CAVIDADE ORAL E LÍNGUA (P. 283–288)",
+    ref:"CARNEIRO, J. Sistema Digestório. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 283–314.",
+    t:{ bg:"#fdf0f3", border:"rgba(196,80,122,0.22)", accent:"#c4507a", header:"rgba(196,80,122,0.08)" } },
+  { cap:"CAPÍTULO 15 — SISTEMA DIGESTÓRIO",
+    esp:"ESÔFAGO E ESTÔMAGO (P. 288–297)",
+    ref:"CARNEIRO, J. Sistema Digestório. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 283–314.",
+    t:{ bg:"#fef4ed", border:"rgba(210,105,30,0.22)", accent:"#c2641a", header:"rgba(210,105,30,0.08)" } },
+  { cap:"CAPÍTULO 15 — SISTEMA DIGESTÓRIO",
+    esp:"INTESTINO DELGADO (P. 297–309)",
+    ref:"CARNEIRO, J. Sistema Digestório. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 283–314.",
+    t:{ bg:"#fdfbec", border:"rgba(170,140,0,0.22)", accent:"#8a7200", header:"rgba(170,140,0,0.08)" } },
+  { cap:"CAPÍTULO 15 — SISTEMA DIGESTÓRIO",
+    esp:"INTESTINO GROSSO (P. 309–314)",
+    ref:"CARNEIRO, J. Sistema Digestório. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 283–314.",
+    t:{ bg:"#f0f8f2", border:"rgba(34,130,70,0.22)", accent:"#1a7040", header:"rgba(34,130,70,0.08)" } },
+  { cap:"CAPÍTULO 16 — ÓRGÃOS ASSOCIADOS AO SISTEMA DIGESTÓRIO",
+    esp:"GLÂNDULAS SALIVARES (P. 315–320)",
+    ref:"CARNEIRO, J. Órgãos Associados ao Sistema Digestório. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 315–334.",
+    t:{ bg:"#eef8f7", border:"rgba(20,150,140,0.22)", accent:"#0d8078", header:"rgba(20,150,140,0.08)" } },
+  { cap:"CAPÍTULO 16 — ÓRGÃOS ASSOCIADOS AO SISTEMA DIGESTÓRIO",
+    esp:"PÂNCREAS (P. 320–323)",
+    ref:"CARNEIRO, J. Órgãos Associados ao Sistema Digestório. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 315–334.",
+    t:{ bg:"#eff4fc", border:"rgba(60,110,200,0.22)", accent:"#2a5eb0", header:"rgba(60,110,200,0.08)" } },
+  { cap:"CAPÍTULO 16 — ÓRGÃOS ASSOCIADOS AO SISTEMA DIGESTÓRIO",
+    esp:"FÍGADO E VESÍCULA BILIAR (P. 323–334)",
+    ref:"CARNEIRO, J. Órgãos Associados ao Sistema Digestório. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 315–334.",
+    t:{ bg:"#f2f0fc", border:"rgba(90,80,190,0.22)", accent:"#4a3db0", header:"rgba(90,80,190,0.08)" } },
+  { cap:"CAPÍTULO 20 — GLÂNDULAS ENDÓCRINAS",
+    esp:"TIREOIDE E PARATIREOIDES (P. 405–413)",
+    ref:"ABRAHAMSOHN, P. Glândulas Endócrinas. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 394–420.",
+    t:{ bg:"#f9f0fd", border:"rgba(140,60,190,0.22)", accent:"#7a30b0", header:"rgba(140,60,190,0.08)" } },
+  { cap:"CAPÍTULO 20 — GLÂNDULAS ENDÓCRINAS",
+    esp:"GLÂNDULAS ADRENAIS / SUPRARRENAIS (P. 413–419)",
+    ref:"ABRAHAMSOHN, P. Glândulas Endócrinas. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 394–420.",
+    t:{ bg:"#fdf0f6", border:"rgba(190,50,130,0.22)", accent:"#b02878", header:"rgba(190,50,130,0.08)" } },
+  { cap:"CAPÍTULO 20 — GLÂNDULAS ENDÓCRINAS",
+    esp:"HIPÓFISE / PITUITÁRIA (P. 394–405)",
+    ref:"ABRAHAMSOHN, P. Glândulas Endócrinas. In: JUNQUEIRA, L. C.; CARNEIRO, J. Histologia Básica: Texto e Atlas. 13. ed. Rio de Janeiro: Guanabara Koogan, 2017. p. 394–420.",
+    t:{ bg:"#eff3fb", border:"rgba(50,90,180,0.22)", accent:"#2048a0", header:"rgba(50,90,180,0.08)" } }
+];
+
+/* Pills do painel */
+const PILLS = [
+  { bg:"#fdf0f3", color:"#c4507a", border:"rgba(196,80,122,0.3)" },
+  { bg:"#fef4ed", color:"#c2641a", border:"rgba(210,105,30,0.3)" },
+  { bg:"#fdfbec", color:"#8a7200", border:"rgba(170,140,0,0.3)"  },
+  { bg:"#f0f8f2", color:"#1a7040", border:"rgba(34,130,70,0.3)"  },
+  { bg:"#eef8f7", color:"#0d8078", border:"rgba(20,150,140,0.3)" },
+  { bg:"#eff4fc", color:"#2a5eb0", border:"rgba(60,110,200,0.3)" },
+  { bg:"#f2f0fc", color:"#4a3db0", border:"rgba(90,80,190,0.3)"  },
+  { bg:"#f9f0fd", color:"#7a30b0", border:"rgba(140,60,190,0.3)" },
+  { bg:"#fdf0f6", color:"#b02878", border:"rgba(190,50,130,0.3)" },
+  { bg:"#eff3fb", color:"#2048a0", border:"rgba(50,90,180,0.3)"  }
+];
+
+/* ============================================================
+   ESTADO
+   ============================================================ */
+const STORAGE_KEY = "sorteio_unirio_v4";
+let state      = loadState();
+let emailAtual = null;
+let nomeAtual  = null;
+
+function loadState() {
+  try { const r = localStorage.getItem(STORAGE_KEY); if (r) return JSON.parse(r); } catch(e){}
+  return { gs: {} }; // gs = grupos_sorteados, chave = índice do tema (0-9)
+}
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function emailOk(email) {
+  if (!DOMINIO_AUTORIZADO) return true;
+  return email.toLowerCase().endsWith(DOMINIO_AUTORIZADO.toLowerCase());
+}
+function jaFez(email) {
+  return Object.values(state.gs).find(g => g.email === email);
+}
+function livres() {
+  const usados = Object.keys(state.gs).map(Number);
+  return TEMAS.map((_,i)=>i).filter(i=>!usados.includes(i));
+}
+function setMsg(id, txt, tipo) {
+  document.getElementById(id).innerHTML = txt ? `<div class="msg ${tipo}">${txt}</div>` : "";
+}
+
+/* ============================================================
+   ENTER EM INPUTS
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("email-input")
+    .addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); acessar(); }});
+  document.getElementById("nome-input")
+    .addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); confirmarNome(); }});
+});
+
+/* ============================================================
+   NAVEGAÇÃO
+   ============================================================ */
+function switchTab(tab) {
+  ["sortear","painel"].forEach(t => {
+    document.getElementById("tab-"+t).classList.toggle("active", t===tab);
+    document.getElementById("tab-"+t).setAttribute("aria-selected", String(t===tab));
+    document.getElementById("view-"+t).style.display = t===tab ? "" : "none";
+  });
+  if (tab === "painel") renderPainel();
+}
+
+/* ============================================================
+   PASSO 1 — E-MAIL
+   ============================================================ */
+function acessar() {
+  const email = document.getElementById("email-input").value.trim().toLowerCase();
+  if (!email || !email.includes("@")) {
+    setMsg("msg-acesso","Digite um e-mail válido.","error"); return;
+  }
+  if (!emailOk(email)) {
+    setMsg("msg-acesso","E-mail não cadastrado na lista de representantes. Verifique com o professor ou monitores.","error"); return;
+  }
+  emailAtual = email;
+  const prev = jaFez(email);
+  if (prev) {
+    setMsg("msg-acesso","","");
+    document.getElementById("section-sortear").style.display = "";
+    document.getElementById("btn-sortear").style.display = "none";
+    document.getElementById("shuffle-display").style.display = "none";
+    renderInfoGrupo(prev.nome, email);
+    mostrarFinal(prev.temaIndex, prev.nome, email);
+    return;
+  }
+  setMsg("msg-acesso","","");
+  document.getElementById("step-nome").style.display = "";
+  setTimeout(() => document.getElementById("nome-input").focus(), 120);
+}
+
+/* ============================================================
+   PASSO 2 — NOME
+   ============================================================ */
+function confirmarNome() {
+  const raw   = document.getElementById("nome-input").value.trim();
+  const nome  = raw.toUpperCase();
+  const partes = nome.split(/\s+/).filter(Boolean);
+  if (partes.length < 2) {
+    setMsg("msg-nome","Informe pelo menos o primeiro e o último nome.","error"); return;
+  }
+  nomeAtual = nome;
+  setMsg("msg-nome","","");
+  document.getElementById("step-nome").style.display     = "none";
+  document.getElementById("section-sortear").style.display = "";
+  document.getElementById("btn-sortear").style.display   = "";
+  document.getElementById("btn-sortear").disabled        = false;
+  document.getElementById("btn-sortear").textContent     = "Sortear Tema →";
+  document.getElementById("shuffle-display").style.display = "none";
+  document.getElementById("resultado-sortear").innerHTML = "";
+  renderInfoGrupo(nome, emailAtual);
+}
+
+function renderInfoGrupo(nome, email) {
+  document.getElementById("info-grupo").innerHTML = `
+    <div class="info-grupo-box">
+      <span class="rep-badge">Representante</span>
+      <div style="min-width:0;">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);letter-spacing:0.03em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${nome}</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-top:2px;">${email}</div>
+      </div>
+    </div>`;
+}
+
+/* ============================================================
+   PASSO 3 — SORTEAR
+   ============================================================ */
+function sortear() {
+  const disponiveis = livres();
+  if (!disponiveis.length) {
+    setMsg("resultado-sortear","Todos os temas já foram sorteados. Fale com os monitores.","error"); return;
+  }
+  const btn     = document.getElementById("btn-sortear");
+  btn.disabled  = true;
+  btn.innerHTML = '<span class="spin">⟳</span> Sorteando…';
+
+  const shuffleEl = document.getElementById("shuffle-display");
+  shuffleEl.style.display = "block";
+
+  let count = 0;
+  const total = 24;
+  const iv = setInterval(() => {
+    const ri = disponiveis[Math.floor(Math.random() * disponiveis.length)];
+    shuffleEl.textContent = TEMAS[ri];
+    count++;
+    if (count >= total) {
+      clearInterval(iv);
+      shuffleEl.style.display = "none";
+      const fi = disponiveis[Math.floor(Math.random() * disponiveis.length)];
+      state.gs[fi] = { email: emailAtual, nome: nomeAtual, temaIndex: fi };
+      saveState();
+      btn.style.display = "none";
+      mostrarFinal(fi, nomeAtual, emailAtual);
+    }
+  }, 75);
+}
+
+/* ============================================================
+   RESULTADO FINAL + FICHA
+   ============================================================ */
+function mostrarFinal(idx, nome, email) {
+  const tema  = TEMAS[idx];
+  const ficha = FICHAS[idx];
+  const gr    = idx + 1;
+  const t     = ficha.t;
+
+  document.getElementById("resultado-sortear").innerHTML = `
+    <div class="result-box" style="--t-bg:${t.bg};--t-border:${t.border};--t-accent:${t.accent};--t-header:${t.header};">
+      <div class="result-num">${gr}</div>
+      <div class="result-inner">
+        <div class="result-eyebrow">✦ Tema Sorteado</div>
+        <div class="result-tema">${tema}</div>
+        <div class="result-grupo">Grupo ${gr} · Sorteio Concluído</div>
+        <div class="result-hint">Tire um print ou anote estas informações</div>
+      </div>
+    </div>
+    <div class="ficha" style="--t-border:${t.border};--t-header:${t.header};--t-accent:${t.accent};">
+      <div class="ficha-header" onclick="toggleFicha(this)">
+        <div class="ficha-title">Ficha do Trabalho — Grupo ${gr}</div>
+        <div class="ficha-chevron">▼</div>
+      </div>
+      <div class="ficha-body">
+        <div class="ficha-row">
+          <div class="ficha-row-label">Capítulo</div>
+          <div class="ficha-row-value">${ficha.cap}</div>
+        </div>
+        <div class="ficha-row">
+          <div class="ficha-row-label">Tema Específico</div>
+          <div class="ficha-row-value">${ficha.esp}</div>
+        </div>
+        <div class="ficha-row">
+          <div class="ficha-row-label">Referência Bibliográfica</div>
+          <div class="ficha-ref">${ficha.ref}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function toggleFicha(hdr) {
+  const body = hdr.nextElementSibling;
+  const chev = hdr.querySelector(".ficha-chevron");
+  const open = body.classList.contains("open");
+  body.classList.toggle("open",!open);
+  chev.classList.toggle("open",!open);
+}
+
+/* ============================================================
+   PAINEL PÚBLICO
+   ============================================================ */
+function renderPainel() {
+  state = loadState();
+  const s = Object.keys(state.gs).length;
+  document.getElementById("cnt-sorteados").textContent = s;
+  document.getElementById("cnt-pendentes").textContent = 10 - s;
+  document.getElementById("progress-fill").style.width  = (s/10*100)+"%";
+
+  let html = "";
+  for (let i = 0; i < 10; i++) {
+    const g = state.gs[i];
+    const p = PILLS[i];
+    if (g) {
+      html += `
+        <div class="painel-row">
+          <div class="p-num">${i+1}</div>
+          <div class="p-info">
+            <div class="p-nome">${g.nome}</div>
+            <div class="p-email">${g.email}</div>
+          </div>
+          <span class="tema-pill" style="background:${p.bg};color:${p.color};border-color:${p.border};">${TEMAS[i]}</span>
+        </div>`;
+    } else {
+      html += `
+        <div class="painel-row row-vazio">
+          <div class="p-num">${i+1}</div>
+          <div class="p-info"><div class="p-nome" style="color:var(--ink4);">—</div></div>
+          <span class="pending-pill">Pendente</span>
+        </div>`;
+    }
+  }
+  document.getElementById("lista-painel").innerHTML = html;
+}
+
+renderPainel();
+</script>
+</body>
+</html>
